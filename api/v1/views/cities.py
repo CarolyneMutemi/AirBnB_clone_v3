@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains City api endpoints functions.
+Handles all default RESTFul API actions for City objects.
 """
 
 from flask import jsonify, abort, request
@@ -79,7 +79,7 @@ def update_city(city_id):
     if not city:
         abort(404)
     data = request.get_json()
-    if not data:
+    if data is None:
         abort(400, description='Not a JSON')
     for key, value in data.items():
         if key not in ['created_at', 'updated_at', 'id', 'state_id']:
