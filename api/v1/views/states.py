@@ -40,6 +40,7 @@ def delete_state(state_id):
     if not obj:
         abort(404)
     obj.delete()
+    storage.save()
     return jsonify({})
 
 
