@@ -50,10 +50,10 @@ def post_state():
     Creates a State.
     """
     if not request.is_json:
-        return "Not a JSON", 400
+        abort(400, description='Not a JSON')
     data = request.get_json()
     if "name" not in data:
-        return "Missing name", 400
+        abort(400, 'Missing name')
     new_obj = State(name=data.get("name"))
     new_obj.save()
     return jsonify(new_obj.to_dict()), 201
@@ -68,7 +68,7 @@ def update_state(state_id):
     if not obj:
         abort(404)
     if not request.is_json:
-        return "Not a JSON", 400
+        abort(400, description='Not a JSON')
     data = request.get_json()
     for key, value in data.items():
         if key not in ["id", "created_at", "updated_at"]:
