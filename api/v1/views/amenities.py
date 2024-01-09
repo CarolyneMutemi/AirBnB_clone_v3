@@ -16,7 +16,7 @@ def get_amenities():
     """
     amenities = []
     for amenity in storage.all(Amenity):
-        amenities.append(amenity)
+        amenities.append(amenity.to_dict())
     return jsonify(amenities)
 
 
@@ -52,7 +52,7 @@ def post_amenity():
     """
     Creates an Amenity object.
     """
-    data = request.get_json
+    data = request.get_json()
     if data is None:
         abort(400, description='Not a JSON')
     if 'name' not in data:
@@ -71,7 +71,7 @@ def update_amenity(amenity_id):
     obj = storage.get(Amenity, amenity_id)
     if not obj:
         abort(404)
-    data = request.get_json
+    data = request.get_json()
     if data is None:
         abort(400, description='Not a JSON')
     for key, value in data.items():
