@@ -12,6 +12,9 @@ from models.place import Place
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'], strict_slashes=False)
 def get_all_amenity(place_id):
+    """
+    Gets all amenities.
+    """
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
